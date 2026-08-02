@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>아이콘 리사이저 (128x128)</title>
+</head>
+<body>
+    <h2>아이콘 변환 중... (다운로드 허용을 눌러주세요)</h2>
+    <canvas id="canvas" width="128" height="128" style="border:1px solid #ccc;"></canvas>
+    
+    <script>
+        window.onload = () => {
+            const img = new Image();
+            // 로컬 서버의 public 폴더에 복사해둔 원본 이미지 호출
+            img.src = '/kjapan_app_icon.png'; 
+            img.crossOrigin = 'Anonymous';
+            
+            img.onload = () => {
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // 128x128 사이즈로 그리기
+                ctx.drawImage(img, 0, 0, 128, 128);
+                
+                // PNG로 변환
+                const dataUrl = canvas.toDataURL('image/png');
+                
+                // 자동 다운로드 트리거
+                const link = document.createElement('a');
+                link.download = 'kjapan_icon_128.png';
+                link.href = dataUrl;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                document.querySelector('h2').innerText = "변환 완료! (kjapan_icon_128.png 다운로드를 확인하세요)";
+            };
+            
+            img.onerror = () => {
+                document.querySelector('h2').innerText = "이미지를 불러오는데 실패했습니다. (원본 파일 없음)";
+            };
+        };
+    </script>
+</body>
+</html>
