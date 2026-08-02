@@ -32,7 +32,8 @@ export default function App() {
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
 
   // Main View Navigation Mode: 'main' | 'login' | 'payment' | 'admin'
-  const [viewMode, setViewMode] = useState<'main' | 'login' | 'payment' | 'admin'>('main');
+  const initialViewMode = window.location.search.includes('admin_dashboard=true') ? 'admin' : 'main';
+  const [viewMode, setViewMode] = useState<'main' | 'login' | 'payment' | 'admin'>(initialViewMode);
 
   // Modals
   const [showSimulateModal, setShowSimulateModal] = useState<boolean>(false);
