@@ -182,18 +182,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBack }) => {
           {/* Quick Info Alert */}
           <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-xs space-y-4">
             <h3 className="font-black text-[22px] text-gray-800">🔥 시스템 작동 상태</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-bold">
-              <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex flex-col gap-2 shadow-sm">
-                <span className="text-[20px] text-blue-800">Database</span>
-                <span className="text-[16px] text-gray-800 leading-snug">Firebase Cloud Firestore<br/>연결 상태 정상</span>
+            <div className="flex flex-col gap-4 font-bold">
+              <div className="bg-blue-50 p-4 sm:p-5 rounded-lg border border-blue-100 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 shadow-sm">
+                <span className="text-[20px] text-blue-800 whitespace-nowrap min-w-[160px]">Database</span>
+                <span className="text-[18px] text-gray-800">Firebase Cloud Firestore 연결 상태 정상</span>
               </div>
-              <div className="bg-purple-50 p-4 rounded-lg border border-purple-100 flex flex-col gap-2 shadow-sm">
-                <span className="text-[20px] text-purple-800">PayPal Gateway</span>
-                <span className="text-[16px] text-gray-800 leading-snug">$1 USD 10일 라이선스<br/>Capture 모듈 정상 연동</span>
+              <div className="bg-purple-50 p-4 sm:p-5 rounded-lg border border-purple-100 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 shadow-sm">
+                <span className="text-[20px] text-purple-800 whitespace-nowrap min-w-[160px]">PayPal Gateway</span>
+                <span className="text-[18px] text-gray-800">$1 USD 10일 라이선스 Capture 모듈 정상 연동</span>
               </div>
-              <div className="bg-amber-50 p-4 rounded-lg border border-amber-100 flex flex-col gap-2 shadow-sm">
-                <span className="text-[20px] text-amber-800">Auth</span>
-                <span className="text-[16px] text-gray-800 leading-snug">Kakao OAuth 2.0 및<br/>Firebase Auth 호환 연동</span>
+              <div className="bg-amber-50 p-4 sm:p-5 rounded-lg border border-amber-100 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 shadow-sm">
+                <span className="text-[20px] text-amber-800 whitespace-nowrap min-w-[160px]">Auth</span>
+                <span className="text-[18px] text-gray-800">Kakao OAuth 2.0 및 Firebase Auth 호환 연동</span>
               </div>
             </div>
           </div>
