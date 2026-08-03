@@ -569,6 +569,13 @@ export default function App() {
                   공공장소나 조용한 곳에서는 주변에 피해가 갈 수 있으니 사용을 주의해 주세요!
                 </p>
               </div>
+
+              <div className="bg-gray-50 p-3.5 rounded-lg border border-gray-200 text-left w-full mt-2">
+                <p className="text-[12px] text-gray-600 font-medium flex items-start gap-2 leading-relaxed">
+                  <span className="text-[14px]">💡</span>
+                  <span><strong>안내:</strong> 실제 일본 현지 방문 시에는 앱을 켜두거나 별도의 설정 없이도 위험 상황 시 <strong>자동으로 경보가 울립니다.</strong></span>
+                </p>
+              </div>
             </div>
             
             <div className="mt-6 flex flex-col gap-2">
