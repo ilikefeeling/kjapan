@@ -40,6 +40,7 @@ export default function App() {
   const [showTranslateModal, setShowTranslateModal] = useState<boolean>(false);
   const [showAiModal, setShowAiModal] = useState<boolean>(false);
   const [showContactsModal, setShowContactsModal] = useState<boolean>(false);
+  const [showMainWarningModal, setShowMainWarningModal] = useState<boolean>(false);
   const [pushNotificationMessage, setPushNotificationMessage] = useState<string | null>(null);
 
   // Registered Domestic Emergency Contacts
@@ -427,6 +428,7 @@ export default function App() {
                   onFindShelter={() => setActiveTab('map')}
                   onOpenManual={() => setActiveTab('manual')}
                   onOpenContacts={() => setShowContactsModal(true)}
+                  onOpenSimulate={() => setShowMainWarningModal(true)}
                 />
 
                 {/* Emergency SOS Quick Dial Bar */}
@@ -550,6 +552,44 @@ export default function App() {
             setViewMode('payment');
           }}
         />
+      )}
+
+      {/* Main Screen Warning Modal for Simulation */}
+      {showMainWarningModal && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+          <div className="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl animate-fade-in border border-gray-100">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center shadow-inner">
+                <Bell className="w-8 h-8 animate-pulse" />
+              </div>
+              <div>
+                <h3 className="text-[18px] font-black text-gray-900 mb-2">실제 재난 사이렌 주의</h3>
+                <p className="text-[13px] text-gray-600 leading-relaxed">
+                  매우 큰 재난 사이렌 소리와 한국어 음성 안내가 기기 스피커로 <strong>즉시 재생</strong>됩니다.<br/><br/>
+                  공공장소나 조용한 곳에서는 주변에 피해가 갈 수 있으니 사용을 주의해 주세요!
+                </p>
+              </div>
+            </div>
+            
+            <div className="mt-6 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setShowMainWarningModal(false);
+                  handleTriggerTestPush();
+                }}
+                className="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-[14px] transition-all shadow-md active:scale-[0.98]"
+              >
+                소리 켜고 체험하기
+              </button>
+              <button
+                onClick={() => setShowMainWarningModal(false)}
+                className="w-full py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl text-[14px] transition-all active:scale-[0.98]"
+              >
+                취소하기
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
