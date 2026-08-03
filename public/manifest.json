@@ -4,15 +4,9 @@
   "description": "일본 여행객 전용 모국어 재난경보 & 오프라인 대피소 PWA",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/kjapan_app_icon.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512",
+      "sizes": "192x192 512x512",
       "purpose": "any maskable"
     }
   ],
