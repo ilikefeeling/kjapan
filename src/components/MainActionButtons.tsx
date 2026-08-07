@@ -44,10 +44,16 @@ export const MainActionButtons: React.FC<MainActionButtonsProps> = ({
       {/* Middle Card: Find Shelter */}
       <button
         onClick={onFindShelter}
-        className="w-full h-[60px] bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex items-center justify-center gap-2.5 shadow-lg active:scale-98 transition-all duration-150 cursor-pointer group"
+        className="w-full h-[68px] bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex flex-col items-center justify-center gap-0.5 shadow-lg active:scale-98 transition-all duration-150 cursor-pointer group relative overflow-hidden"
       >
-        <MapPin className="w-6 h-6 text-white fill-white/20 group-hover:scale-110 transition-transform" />
-        <span className="text-[20px] font-extrabold tracking-tight">통신 끊겨도 대피소 가기</span>
+        <div className="absolute top-0 right-0 bg-emerald-500 text-[9px] font-black px-2 py-0.5 rounded-bl-lg tracking-widest uppercase">
+          100% OFFLINE
+        </div>
+        <div className="flex items-center justify-center gap-2">
+          <MapPin className="w-6 h-6 text-white fill-white/20 group-hover:scale-110 transition-transform" />
+          <span className="text-[20px] font-extrabold tracking-tight">통신 끊겨도 대피소 가기</span>
+        </div>
+        <span className="text-[11px] font-medium text-blue-200">인터넷 없이도 GPS로 가까운 피난소 안내</span>
       </button>
 
       {/* Bottom Cards: Grid Layout (50% / 50%) */}

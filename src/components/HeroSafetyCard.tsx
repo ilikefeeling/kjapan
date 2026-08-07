@@ -37,16 +37,23 @@ export const HeroSafetyCard: React.FC<HeroSafetyCardProps> = ({
         {/* Monitoring Card */}
         <div className="bg-white rounded-xl p-3 flex flex-col justify-center border border-[#c5c6cd]/50 card-shadow gap-1.5 overflow-hidden relative">
           <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-500"></div>
-          <div className="flex items-center gap-2 pl-1.5">
-            <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-              <span className="relative flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-600"></span>
-              </span>
+          <div className="flex flex-col gap-0.5">
+            <div className="flex items-center gap-2 pl-1.5">
+              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                <span className="relative flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-600"></span>
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-extrabold text-blue-600 bg-blue-100 px-1.5 py-0.5 rounded w-fit mb-0.5 leading-none">
+                  일본 기상청(JMA) 연동
+                </span>
+                <span className="font-bold text-[14px] text-blue-800 tracking-tight leading-tight">
+                  실시간 모니터링 중
+                </span>
+              </div>
             </div>
-            <span className="font-bold text-[14px] text-blue-700 tracking-tight leading-tight">
-              JMA 모니터링 중
-            </span>
           </div>
           <p className="text-[11px] font-medium text-emerald-600 pl-1.5 leading-tight tracking-tight">
             응답 정상 0.01s

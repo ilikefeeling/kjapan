@@ -214,6 +214,27 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </p>
         )}
       </div>
+
+      {/* Feedback & Bug Report */}
+      <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm space-y-3">
+        <div className="flex items-center gap-2">
+          <div className="p-2 bg-purple-100 text-purple-600 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <h4 className="font-bold text-sm text-slate-900">의견 보내기 / 버그 신고</h4>
+        </div>
+
+        <p className="text-xs text-slate-600 leading-relaxed">
+          KJapan을 사용하며 불편했던 점이나 추가되었으면 하는 기능이 있다면 알려주세요! 여러분의 소중한 의견이 수많은 한국인의 안전을 지킵니다.
+        </p>
+
+        <a
+          href="mailto:kjapan.office@gmail.com?subject=[KJapan 피드백/버그신고]"
+          className="w-full py-2.5 bg-purple-600 text-white font-bold text-xs rounded-xl hover:bg-purple-700 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+        >
+          <span>🚀 의견 보내기 (이메일 연결)</span>
+        </a>
+      </div>
     </div>
   );
 };
