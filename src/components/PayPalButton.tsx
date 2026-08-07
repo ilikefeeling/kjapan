@@ -16,7 +16,7 @@ export const PayPalButton: React.FC<PayPalButtonProps> = ({ userId, passStartsAt
   const [paymentDone, setPaymentDone] = useState(false);
 
   const initialOptions = {
-    clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID || "test",
+    clientId: (import.meta as any).env.VITE_PAYPAL_CLIENT_ID || "test",
     currency: "USD",
     intent: "capture",
   };

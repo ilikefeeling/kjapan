@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>KJapan - 일본 여행 재난 대피 PWA</title>
+    <title>일본 여행 필수 안전 앱, Kjapan - 지진 알림 및 대피소 안내</title>
+    <meta name="description" content="일본 방문 중 지진이나 재난이 발생했을 때 당황하지 마세요. Kjapan은 일본어 재난 속보를 실시간 한국어로 말해주는 앱입니다. 최저가 항공으로 떠난 여행, 안전까지 확실하게 챙기세요. 대피소 찾기와 비상 연락망까지 한 번에! 지금 무료로 다운로드하세요." />
+    <meta name="keywords" content="일본 여행, 일본 방문, 최저가 항공, 지진 대피, 재난 안전 앱, 방일 외국인 비상 연락망" />
     
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="KJapan" />
-    <meta property="og:title" content="KJapan - 일본 여행 재난 대피 PWA" />
-    <meta property="og:description" content="일본 재난 방송을 한국어로 듣고, 여행 중 안전하게 대피할 수 있도록 돕는 필수 앱입니다." />
+    <meta property="og:site_name" content="Kjapan" />
+    <meta property="og:title" content="일본 여행 필수 안전 앱, Kjapan - 지진 알림 및 대피소 안내" />
+    <meta property="og:description" content="일본 방문 중 지진이나 재난이 발생했을 때 당황하지 마세요. Kjapan은 일본어 재난 속보를 실시간 한국어로 말해주는 앱입니다. 최저가 항공으로 떠난 여행, 안전까지 확실하게 챙기세요. 대피소 찾기와 비상 연락망까지 한 번에! 지금 무료로 다운로드하세요." />
     <meta property="og:url" content="https://www.kjapan.site/" />
     <meta property="og:image" content="https://www.kjapan.site/kjapan_app_icon.png" />
     <meta property="og:image:width" content="1024" />
@@ -17,8 +19,8 @@
     <meta property="og:locale" content="ko_KR" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="KJapan - 일본 여행 재난 대피 PWA" />
-    <meta name="twitter:description" content="일본 재난 방송을 한국어로 듣고, 여행 중 안전하게 대피할 수 있도록 돕는 필수 앱입니다." />
+    <meta name="twitter:title" content="일본 여행 필수 안전 앱, Kjapan - 지진 알림 및 대피소 안내" />
+    <meta name="twitter:description" content="일본 방문 중 지진이나 재난이 발생했을 때 당황하지 마세요. Kjapan은 일본어 재난 속보를 실시간 한국어로 말해주는 앱입니다. 최저가 항공으로 떠난 여행, 안전까지 확실하게 챙기세요. 대피소 찾기와 비상 연락망까지 한 번에! 지금 무료로 다운로드하세요." />
     <meta name="twitter:image" content="https://www.kjapan.site/kjapan_app_icon.png" />
     <!-- Favicon & App Icon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -30,9 +32,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y61M69SLED"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y61M69SLED');
+    </script>
   </head>
   <body class="bg-[#fbf8fa] text-[#1b1b1d] antialiased selection:bg-red-500 selection:text-white">
-    <div id="root"></div>
+    <div id="root">
+      <div style="display: none;" aria-hidden="true">
+        <h1>가장 안전한 일본 여행을 위한 완벽한 준비, Kjapan</h1>
+        <p>실시간 지진 알림부터 오프라인 대피소 안내, 비상 연락망까지. 외국인을 위한 일본 재난 안전 가이드.</p>
+        <h2>실시간 일본 재난 및 지진 알림 (한국어 음성 지원)</h2>
+        <p>일본어 재난 속보를 실시간 한국어로 번역하여 말해줍니다. 기상청 데이터를 기반으로 빠르고 정확한 재난 정보를 제공합니다.</p>
+        <h2>내 주변 가장 가까운 대피소 찾기</h2>
+        <p>인터넷이 끊겨도 안심하세요. 오프라인 상태에서도 현재 위치 기반으로 대피소를 안내합니다.</p>
+        <h2>원터치 비상 연락 및 여권/신분증 보관 (My Pass)</h2>
+        <p>대사관, 영사관 및 현지 긴급 연락처(110, 119)에 즉시 연결 가능하며, 중요 신분증 정보를 안전하게 보관합니다.</p>
+        <h2>재난 경보 시뮬레이션 체험</h2>
+        <p>실제 재난 상황에 당황하지 않도록 '재난 경보 시뮬레이션'을 실행해 보세요. 앱 내에서 언제든 경보 알림과 한국어 음성 대피 안내를 미리 체험하고 대비할 수 있습니다.</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

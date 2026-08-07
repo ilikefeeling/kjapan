@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Volume2, Database, Shield, Bell, CheckCircle, RefreshCw, Cpu, Award, Smartphone } from 'lucide-react';
 import { TravelPass, UserLocation } from '../types/disaster';
-import { playEmergencySirenChime } from '../utils/audioAlert';
+import { playEmergencySirenTone } from '../utils/audioAlert';
 import { offlineDb } from '../lib/offlineDb';
 
 interface SettingsViewProps {

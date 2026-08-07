@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재난 사이렌 오디오 추출기</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f3f4f6; margin: 0; }
+        .card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); text-align: center; max-width: 400px; }
+        h1 { font-size: 1.5rem; color: #111827; margin-bottom: 1rem; }
+        p { color: #4b5563; margin-bottom: 2rem; font-size: 0.95rem; }
+        button { background: #dc2626; color: white; border: none; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; width: 100%; }
+        button:hover { background: #b91c1c; }
+        button:disabled { background: #9ca3af; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>🚨 사이렌 소리 추출하기</h1>
+    <p>아래 버튼을 누르면 프로젝트의 코드(Web Audio API)를 기반으로 10초 분량의 <strong>사이렌 오디오(.wav) 파일</strong>을 생성하여 다운로드합니다.</p>
+    <button id="downloadBtn">사이렌 소리 파일 다운로드 (.wav)</button>
+</div>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('downloadBtn');
+    btn.disabled = true;
+    btn.textContent = '생성 중...';
+
+    try {
+        const duration = 10.0; // 10초 길이
+        const sampleRate = 44100;
+        const offlineCtx = new OfflineAudioContext(1, sampleRate * duration, sampleRate);
+        
+        // 원본 audioAlert.ts의 사이렌 로직을 동일하게 재현
+        for (let time = 0; time < duration; time += 0.9) {
+            const osc = offlineCtx.createOscillator();
+            const gain = offlineCtx.createGain();
+            osc.type = 'sawtooth';
+            
+            osc.frequency.setValueAtTime(440, time);
+            if (time + 0.4 < duration) osc.frequency.exponentialRampToValueAtTime(880, time + 0.4);
+            if (time + 0.8 < duration) osc.frequency.exponentialRampToValueAtTime(440, time + 0.8);
+            
+            gain.gain.setValueAtTime(0.3, time);
+            if (time + 0.8 < duration) {
+                gain.gain.exponentialRampToValueAtTime(0.01, time + 0.8);
+            } else {
+                gain.gain.exponentialRampToValueAtTime(0.01, duration);
+            }
+            
+            osc.connect(gain);
+            gain.connect(offlineCtx.destination);
+            
+            osc.start(time);
+            osc.stop(Math.min(time + 0.8, duration));
+        }
+        
+        // 오디오 렌더링 시작
+        const renderedBuffer = await offlineCtx.startRendering();
+        
+        // Float32Array 버퍼를 WAV 파일 포맷 바이트 배열로 변환
+        const wavData = audioBufferToWav(renderedBuffer);
+        const blob = new Blob([wavData], { type: 'audio/wav' });
+        const url = URL.createObjectURL(blob);
+        
+        // 다운로드 트리거
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'disaster-siren.wav';
+        document.body.appendChild(a);
+        a.click();
+        
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 100);
+
+        btn.textContent = '다운로드 완료!';
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.textContent = '사이렌 소리 파일 다운로드 (.wav)';
+        }, 2000);
+    } catch (e) {
+        console.error(e);
+        btn.textContent = '오류 발생';
+        btn.style.background = '#000';
+    }
+});
+
+// AudioBuffer to WAV 헬퍼 함수
+function audioBufferToWav(buffer) {
+    const numChannels = buffer.numberOfChannels;
+    const sampleRate = buffer.sampleRate;
+    const format = 1; // PCM
+    const bitDepth = 16;
+    
+    const result = new Float32Array(buffer.length);
+    buffer.copyFromChannel(result, 0); // 모노 채널(0)
+    
+    const byteRate = (sampleRate * numChannels * bitDepth) / 8;
+    const blockAlign = (numChannels * bitDepth) / 8;
+    const dataSize = result.length * numChannels * 2;
+    const bufferSize = 44 + dataSize;
+    
+    const arrayBuffer = new ArrayBuffer(bufferSize);
+    const view = new DataView(arrayBuffer);
+    
+    function writeString(view, offset, string) {
+        for (let i = 0; i < string.length; i++) {
+            view.setUint8(offset + i, string.charCodeAt(i));
+        }
+    }
+    
+    writeString(view, 0, 'RIFF');
+    view.setUint32(4, 36 + dataSize, true);
+    writeString(view, 8, 'WAVE');
+    writeString(view, 12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, format, true);
+    view.setUint16(22, numChannels, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, byteRate, true);
+    view.setUint16(32, blockAlign, true);
+    view.setUint16(34, bitDepth, true);
+    writeString(view, 36, 'data');
+    view.setUint32(40, dataSize, true);
+    
+    let offset = 44;
+    for (let i = 0; i < result.length; i++, offset += 2) {
+        let s = Math.max(-1, Math.min(1, result[i]));
+        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    }
+    return view;
+}
+</script>
+</body>
+</html>

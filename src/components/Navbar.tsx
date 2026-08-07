@@ -2,7 +2,7 @@
 import React from 'react';
 import { Shield, Wifi, WifiOff, PhoneCall, Award, Volume2 } from 'lucide-react';
 import { TravelPass } from '../types/disaster';
-import { playEmergencySirenChime } from '../utils/audioAlert';
+import { playEmergencySirenTone } from '../utils/audioAlert';
 
 interface NavbarProps {
   isOnline: boolean;

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재난 경고 화면 UI 템플릿</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 커스텀 폰트 및 애니메이션 */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-pulse-fast {
+            animation: pulseFast 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulseFast {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+
+    <div class="w-full max-w-md p-4 space-y-8 mt-10">
+        
+        <!-- 1. 재난 발생 시 상단 긴급 배너 (HeroSafetyCard 스타일) -->
+        <h2 class="text-xl font-bold text-gray-700 mb-2">1. 상단 긴급 배너 (Hero Card)</h2>
+        <div class="bg-red-600 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden">
+            <!-- 펄스 효과 배경 -->
+            <div class="absolute top-0 right-0 p-8 opacity-20 animate-pulse-fast">
+                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-24 h-24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+            </div>
+            
+            <div class="relative z-10 flex flex-col items-start space-y-4">
+                <div class="bg-white/20 px-3 py-1 rounded-full flex items-center gap-2 border border-white/30 backdrop-blur-sm">
+                    <div class="w-2 h-2 bg-red-300 rounded-full animate-ping"></div>
+                    <span class="text-sm font-bold tracking-wide">긴급 지진 속보 (DANGER)</span>
+                </div>
+                
+                <div class="space-y-1">
+                    <h2 class="text-3xl font-black tracking-tight leading-tight">
+                        도쿄도 시부야구<br/>
+                        진도 6 강진 발생
+                    </h2>
+                    <p class="text-red-100 text-[15px] font-medium pt-2">
+                        발생시간: 2026-08-04 08:45 AM
+                    </p>
+                </div>
+
+                <div class="w-full pt-4 space-y-3">
+                    <button class="w-full bg-white text-red-600 py-3.5 rounded-xl font-black text-[16px] shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        가장 가까운 대피소 찾기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-gray-300" />
+
+        <!-- 2. 중앙 팝업 모달 스타일 -->
+        <h2 class="text-xl font-bold text-gray-700 mb-2 mt-8">2. 경고 모달 팝업</h2>
+        <!-- 모달 컨테이너 (실제 사용시 fixed inset-0 로 화면 전체를 덮게 사용) -->
+        <div class="bg-black/60 p-4 rounded-3xl flex items-center justify-center">
+            
+            <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl animate-fade-in border border-gray-100">
+                <div class="flex flex-col items-center text-center space-y-4">
+                    <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center shadow-inner">
+                        <svg class="w-8 h-8 animate-pulse-fast" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-[18px] font-black text-gray-900 mb-2">실제 재난 사이렌 주의</h3>
+                        <p class="text-[13px] text-gray-600 leading-relaxed">
+                            매우 큰 재난 사이렌 소리와 한국어 음성 안내가 기기 스피커로 <strong class="text-red-600">즉시 재생</strong>됩니다.<br/><br/>
+                            공공장소나 조용한 곳에서는 주변에 피해가 갈 수 있으니 사용을 주의해 주세요!
+                        </p>
+                    </div>
+    
+                    <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-200 text-left w-full mt-2">
+                        <p class="text-[12px] text-gray-600 font-medium flex items-start gap-2 leading-relaxed">
+                            <span class="text-[14px]">💡</span>
+                            <span><strong>안내:</strong> 실제 일본 현지 방문 시에는 앱을 켜두거나 별도의 설정 없이도 위험 상황 시 <strong>자동으로 경보가 울립니다.</strong></span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex flex-col gap-2">
+                    <button class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-[14px] transition-all shadow-md active:scale-[0.98]">
+                        소리 켜고 체험하기
+                    </button>
+                    <button class="w-full py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl text-[14px] transition-all active:scale-[0.98]">
+                        취소하기
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
